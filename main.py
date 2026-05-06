@@ -273,16 +273,17 @@ def main(args):
     print(f"Creating model: {args.model}")
     model = create_model(
         args.model,
-        base_keep_rate=args.base_keep_rate,
-        drop_loc=eval(args.drop_loc),
+        keep_rate=(args.base_keep_rate,),
         pretrained=False,
         num_classes=args.nb_classes,
         drop_rate=args.drop,
         drop_path_rate=args.drop_path,
-        drop_block_rate=None,
         fuse_token=args.fuse_token,
         img_size=(args.input_size, args.input_size)
     )
+
+    # Store drop_loc for use in training loop
+    model.drop_loc = eval(args.drop_loc) if args.fuse_token else None
 
     if args.finetune:
         if args.finetune.startswith('https'):
