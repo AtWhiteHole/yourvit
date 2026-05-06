@@ -111,7 +111,7 @@ CUDA_VISIBLE_DEVICES=0 python main.py \
 CUDA_VISIBLE_DEVICES=0 python main.py \
   --model deit_small_patch16_224 \
   --teacher-model regnety_160 \
-  --teacher-path ./pretrained/regnetY_16gf_imagenet.pth \
+  --teacher-path /root/autodl-tmp/regnetY_16gf_imagenet.pth \
   --data-path /autodo-tmp/imagenet \
   --output_dir ./outputs/exp11_full_method \
   --batch-size 256 \
@@ -214,7 +214,7 @@ CUDA_VISIBLE_DEVICES=0 python main.py \
 CUDA_VISIBLE_DEVICES=0 python main.py \
   --model deit_small_patch16_224 \
   --teacher-model regnety_160 \
-  --teacher-path ./pretrained/regnetY_16gf_imagenet.pth \
+  --teacher-path /root/autodl-tmp/regnetY_16gf_imagenet.pth \
   --data-path /autodo-tmp/imagenet \
   --output_dir ./outputs/exp8_soft_distill \
   --batch-size 256 \
@@ -234,7 +234,7 @@ CUDA_VISIBLE_DEVICES=0 python main.py \
 CUDA_VISIBLE_DEVICES=0 python main.py \
   --model deit_small_patch16_224 \
   --teacher-model regnety_160 \
-  --teacher-path ./pretrained/regnetY_16gf_imagenet.pth \
+  --teacher-path /root/autodl-tmp/regnetY_16gf_imagenet.pth \
   --data-path /autodo-tmp/imagenet \
   --output_dir ./outputs/exp9_hard_distill \
   --batch-size 256 \
@@ -252,7 +252,7 @@ CUDA_VISIBLE_DEVICES=0 python main.py \
 CUDA_VISIBLE_DEVICES=0 python main.py \
   --model deit_small_patch16_224 \
   --teacher-model regnety_160 \
-  --teacher-path ./pretrained/regnetY_16gf_imagenet.pth \
+  --teacher-path /root/autodl-tmp/regnetY_16gf_imagenet.pth \
   --data-path /autodo-tmp/imagenet \
   --output_dir ./outputs/exp10_fixed_soft_hard \
   --batch-size 256 \
@@ -402,7 +402,7 @@ pip install timm==0.4.12 tensorboardX==2.4 torchprofile==0.0.4 lmdb==1.2.1 pyarr
 python download_teacher.py --model regnetY_16gf --output ./pretrained
 
 # 运行训练
-CUDA_VISIBLE_DEVICES=0 python main.py --model deit_small_patch16_224 --teacher-model regnety_160 --teacher-path ./pretrained/regnetY_16gf_imagenet.pth --data-path /autodo-tmp/imagenet --output_dir ./outputs/exp11_full_method --batch-size 256 --epochs 300 --base_keep_rate 0.7 --fuse_token --drop_loc "(3, 6, 9)" --shrink_start_epoch 30 --shrink_epochs 120 --distillation-type adaptive_soft_hard --distillation-alpha-start 0.1 --distillation-alpha-end 0.5 --distillation-tau 4.0
+CUDA_VISIBLE_DEVICES=0 python main.py --model deit_small_patch16_224 --teacher-model regnety_160 --teacher-path /root/autodl-tmp/regnetY_16gf_imagenet.pth --data-path /autodo-tmp/imagenet --output_dir ./outputs/exp11_full_method --batch-size 256 --epochs 300 --base_keep_rate 0.7 --fuse_token --drop_loc "(3, 6, 9)" --shrink_start_epoch 30 --shrink_epochs 120 --distillation-type adaptive_soft_hard --distillation-alpha-start 0.1 --distillation-alpha-end 0.5 --distillation-tau 4.0
 ```
 
 ---

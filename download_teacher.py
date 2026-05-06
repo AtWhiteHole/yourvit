@@ -84,7 +84,7 @@ def main():
     print("=" * 60)
     print(f"\nWeights saved in: {args.output}")
     print("\nYou can now run training with:")
-    print("  python main.py --teacher-path ./pretrained/regnetY_16gf_imagenet.pth ...")
+    print("  python main.py --teacher-path /root/autodl-tmp/regnetY_16gf_imagenet.pth ...")
 
 
 if __name__ == '__main__':
