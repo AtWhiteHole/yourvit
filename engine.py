@@ -53,7 +53,7 @@ def train_one_epoch(model: torch.nn.Module, criterion: DistillationLoss,
             distillation_type=args.distillation_type
         )
         criterion.set_alpha(current_alpha)
-        if torch.distributed.get_rank() == 0:
+        if not torch.distributed.is_initialized() or torch.distributed.get_rank() == 0:
             print(f"Epoch {epoch}: Distillation alpha = {current_alpha:.4f}")
 
     for samples, targets in metric_logger.log_every(data_loader, print_freq, header):
