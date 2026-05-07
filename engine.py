@@ -91,7 +91,7 @@ def train_one_epoch(model: torch.nn.Module, criterion: DistillationLoss,
         metric_logger.update(loss=loss_value)
         metric_logger.update(lr=optimizer.param_groups[0]["lr"])
 
-        if torch.distributed.get_rank() == 0 and it % log_interval == 0:
+        if (not torch.distributed.is_initialized() or torch.distributed.get_rank() == 0) and it % log_interval == 0:
             writer.add_scalar('loss', loss_value, it)
             writer.add_scalar('lr', optimizer.param_groups[0]["lr"], it)
             writer.add_scalar('keep_rate', keep_rate, it)
@@ -175,8 +175,8 @@ def visualize_mask(data_loader, model, device, output_dir, n_visualization, fuse
 
     metric_logger = utils.MetricLogger(delimiter="  ")
     header = 'Visualize:'
-    rank = torch.distributed.get_rank()
-    world_size = torch.distributed.get_world_size()
+    rank = torch.distributed.get_rank() if torch.distributed.is_initialized() else 0
+    world_size = torch.distributed.get_world_size() if torch.distributed.is_initialized() else 1
     mean = torch.tensor(IMAGENET_DEFAULT_MEAN, device=device).reshape(3, 1, 1)
     std = torch.tensor(IMAGENET_DEFAULT_STD, device=device).reshape(3, 1, 1)
 
